@@ -1,0 +1,134 @@
+
+create database bookquest;
+use bookquest;
+show tables;
+select * from department;
+select * from subject;
+select * from book;
+select * from chapter;
+select * from chapter_topic;
+select * from user;
+select * from book_transaction;
+select * from reserved_book;
+select * from favourite_book;
+select * from membership_plans;
+select * from membership;
+select * from payment;
+
+INSERT INTO DEPARTMENT(NAME) VALUES('BSC COMPUTER SCIENCE');
+INSERT INTO DEPARTMENT(NAME) VALUES('BSC INFORMATION TECHNOLOGY');
+INSERT INTO DEPARTMENT(NAME) VALUES('BSC STATISTICS');
+INSERT INTO DEPARTMENT(NAME) VALUES('COMMERCE ');
+INSERT INTO DEPARTMENT(NAME) VALUES('BSC COMPUTER APPLICATION');
+
+INSERT INTO SUBJECT(code,name,semester,department_id) VALUES(3501,'SYSTEM PROGRAMMING & OPERATING SYSTEM',5,2);
+INSERT INTO SUBJECT(code,name,semester,department_id) VALUES(3502,'THEROTICAL COMPUTER SCIENCE',5,2);
+INSERT INTO SUBJECT(code,name,semester,department_id) VALUES(1101,'C Programming',1,2);
+INSERT INTO SUBJECT(code,name,semester,department_id) VALUES(3403,'Java Programming',4,2);
+INSERT INTO SUBJECT(code,name,semester,department_id) VALUES(1101,'Python Programming',1,5);
+INSERT INTO SUBJECT(code,name,semester,department_id) VALUES(3506,'ANDROID STUDIO',5,5);
+INSERT INTO SUBJECT(code,name,semester,department_id) VALUES(3504,'R PROGRAMMING',5,4);
+INSERT INTO SUBJECT(code,name,semester,department_id) VALUES(3505,'PHP PROGRAMMING',5,1);
+
+INSERT INTO BOOK(id, title, author, description, publication, add_date, image, copies, available_qty, type, pdf, subject_id) VALUES('BQ231115220440','C Programming Language','Brian W. Kernighan, Dennis Ritchie','This ebook is the first authorized digital version of Kernighan and Ritchie’s 1988 classic, The C Programming Language (2nd Ed.). One of the best-selling programming books published in the last fifty years, "K&R" has been called everything from the "bible" to "a landmark in computer science" and it has influenced generations of programmers. Available now for all leading ebook platforms, this concise and beautifully written text is a "must-have" reference for every serious programmer’s digital library.
+
+As modestly described by the authors in the Preface to the First Edition, this "is not an introductory programming manual; it assumes some familiarity with basic programming concepts like variables, assignment statements, loops, and functions. Nonetheless, a novice programmer should be able to read along and pick up the language, although access to a more knowledgeable colleague will help."','Prentice Hall',current_date(),'image',5,5,'Hard Copy','',5);
+
+INSERT INTO BOOK(id, title, author, description, publication, add_date, image, copies, available_qty, type, pdf, subject_id) VALUES('BQ231115221736','Java: The Complete Reference, Twelfth Edition','Herbert Schildt','The Definitive Java Programming Guide
+
+Fully updated for Java SE 17, Java™: The Complete Reference, Twelfth Edition explains how to develop, compile, debug, and run Java programs. Best-selling programming author Herb Schildt covers the entire Java language, including its syntax, keywords, and fundamental programming principles. You’ll also find information on key portions of the Java API library, such as I/O, the Collections Framework, the stream library, and the concurrency utilities. Swing, JavaBeans, and servlets are examined, and numerous examples demonstrate Java in action. Of course, recent additions to the Java language, such as records, sealed classes, and switch expressions are discussed in detail. Best of all, the book is written in the clear, crisp, uncompromising style that has made Schildt the choice of millions worldwide.','McGraw Hill',current_date(),'image',5,5,'Hard Copy','',6);
+
+INSERT INTO BOOK(id, title, author, description, publication, add_date, image, copies, available_qty, type, pdf, subject_id) VALUES('BQ231115221945','Android Studio 4.2 Development Essentials - Java Edition Developing Android 11 Apps Using Android Studio 4.2, Java and Android Jetpack','Neil Smyth','Fully updated for Android Studio 4.2, the goal of this book is to teach the skills necessary to develop Android-based applications using the Java programming language.
+
+Beginning with the basics, this book provides an outline of the steps necessary to set up an Android development and testing environment.
+
+An overview of Android Studio is included covering areas such as tool windows, the code editor, and the Layout Editor tool. An introduction to the architecture of Android is followed by an in-depth look at the design of Android applications and user interfaces using the Android Studio environment.
+
+Chapters are also included covering the Android Architecture Components including view models, lifecycle management, Room database access, the Database Inspector, app navigation, live data, and data binding.
+
+More advanced topics such as intents are also covered, as are touch screen handling, gesture recognition, and the recording and playback of audio. This edition of the book also covers printing, transitions, cloud-based file storage, and foldable device support.
+
+The concepts of material design are also covered in detail, including the use of floating action buttons, Snackbars, tabbed interfaces, card views, navigation drawers, and collapsing toolbars.
+
+Other key features of Android Studio 4.2 and Android are also covered in detail including the Layout Editor, the ConstraintLayout and ConstraintSet classes, MotionLayout Editor, view binding, constraint chains, barriers, and direct reply notifications.
+
+Chapters also cover advanced features of Android Studio such as App Links, Dynamic Delivery, the Android Studio Profiler, Gradle build configuration, and submitting apps to the Google Play Developer Console.
+
+Assuming you already have some programming experience, are ready to download Android Studio and the Android SDK, have access to a Windows, Mac, or Linux system, and ideas for some apps to develop, you are ready to get started.','',current_date(),'image',5,5,'Hard Copy','',8);
+
+
+INSERT INTO BOOK(id, title, author, description, publication, add_date, image, copies, available_qty, type, pdf, subject_id) VALUES('BQ231115222910','Learning R Programming','Kun Ren',"R is a high-level functional language and one of the must-know tools for data science and statistics. Powerful but complex, R can be challenging for beginners and those unfamiliar with its unique behaviors. Learning R Programming is the solution - an easy and practical way to learn R and develop a broad and consistent understanding of the language. Through hands-on examples you'll discover powerful R tools, and R best practices that will give you a deeper understanding of working with data. You'll get to grips with R's data structures and data processing techniques, as well as the most popular R packages to boost your productivity from the offset.
+
+Start with the basics of R, then dive deep into the programming techniques and paradigms to make your R code excel. Advance quickly to a deeper understanding of R's behavior as you learn common tasks including data analysis, databases, web scraping, high performance computing, and writing documents. By the end of the book, you'll be a confident R programmer adept at solving problems with the right techniques.",'',current_date(),'image',5,5,'Hard Copy','',7);
+
+
+INSERT INTO BOOK(id, title, author, description, publication, add_date, image, copies, available_qty, type, pdf, subject_id) VALUES('BQ231115223052','Programming PHP','Kevin Tatroe, Peter MacIntyre','Why is PHP the most widely used programming language on the web? This updated edition teaches everything you need to know to create effective web applications using the latest features in PHP 7.4. You’ll start with the big picture and then dive into language syntax, programming techniques, and other details, using examples that illustrate both correct usage and common idioms.
+
+If you have a working knowledge of HTML, authors Kevin Tatroe and Peter MacIntyre provide many style tips and practical programming advice in a clear and concise manner to help you become a top-notch PHP programmer.
+
+Understand what’s possible when you use PHP programs
+Learn language fundamentals, including data types, variables, operators, and flow control statements
+Explore functions, strings, arrays, and objects
+Apply common web application techniques, such as form processing, data validation, session tracking, and cookies
+Interact with relational databases like MySQL or NoSQL databases such as MongoDB
+Generate dynamic images, create PDF files, and parse XML files
+Learn secure scripts, error handling, performance tuning, and other advanced topics
+Get a quick reference to PHP core functions and standard extensions','',current_date(),'image',5,5,'Hard Copy','',8);
+
+
+INSERT INTO BOOK(id, title, author, description, publication, add_date, image, copies, available_qty, type, pdf, subject_id) VALUES('BQ231116091800','Python: Advanced Guide to Programming Code with Python','Charlie Masterson',"Learn Python programming today and begin your path towards Python programming mastery!
+
+In this Definitive Python Guide, you’re about to discover...
+
+How to program code in Python through learning the core essentials that every Python programmer must know. Python is a very popular programming language, and there are a great many books on the market concerning it. We cut to the chase and tell you why you should get this one:
+
+Here is a Preview of What You'll Learn...
+
+Essentials of Python programming. Quickly pick up the language and start applying the concepts to any code that you write
+Major facets of Python programming - including concepts you can apply to *any* language
+Various mechanics of Python programming: control flow, variables, lists/dictionaries, and classes – and why learning these core principles are important to Python programming success
+Object-oriented programming, its influence to today’s popular computer languages, and why it matters
+... And much, much more!
+Added Benefits of owning this book:
+
+Get a better understanding of the Python programming language
+Learn the basic essentials of Python in order to gain the confidence to tackle more complex topics
+Gain the critical steps in your path towards Python programming mastery
+By implementing the lessons in this book, not only would you learn one of today’s popular computer languages, but it will serve as your guide in accomplishing all your Python goals – whether as a fun hobby or as a starting point into a successful and long term programming career.
+
+Take action today and get this book now to reach your Python programming goals.",'',current_date(),'image',5,5,'e-book','',7);
+
+
+INSERT INTO CHAPTER(chapter_no, name, book_id) VALUES(1,'Introduction','BQ231115220440');
+INSERT INTO CHAPTER(chapter_no, name, book_id) VALUES(2,'Types, Operators, and Expressions','BQ231115220440');
+INSERT INTO CHAPTER(chapter_no, name, book_id) VALUES(3,'Branching and Iteration','BQ231115220440');
+INSERT INTO CHAPTER(chapter_no, name, book_id) VALUES(4,'Functions','BQ231115220440');
+INSERT INTO CHAPTER(chapter_no, name, book_id) VALUES(5,'Scope and Extent','BQ231115220440');
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Programming and Programming Languages',1);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('The C Programming Language',1);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('A First Program',1);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Variants of Hello World',1);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('A Numerical Example',1);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Identifiers',2);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Types',2);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Constants',2);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('If-Else',3);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('?: Conditional Expression',3);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Switch',3);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('While Loops',3);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Do-While Loops',3);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('For Loops',3);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Break and Continue',3);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Function Prototypes',4);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Function Definition',4);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Benefits of Functions',4);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('Local Scope and Automatic Extent',5);
+INSERT INTO CHAPTER_TOPIC(topic_name,chapter_id) VALUES('External Scope and Static Extent',5);
+
+
+INSERT INTO CHAPTER(chapter_no, name, book_id) VALUES(1,'How Python Runs Programs','BQ231116091800');
+INSERT INTO CHAPTER(chapter_no, name, book_id) VALUES(2,'How You Run Programs','BQ231116091800');
+
+INSERT INTO MEMBERSHIP_PLANS(membership_type, month_1, month_3, month_6, month_12) VALUES('BASIC',300,279,249,189);
+INSERT INTO MEMBERSHIP_PLANS(membership_type, month_1, month_3, month_6, month_12) VALUES('STANDARD',449,389,299,239);
+INSERT INTO MEMBERSHIP_PLANS(membership_type, month_1, month_3, month_6, month_12) VALUES('PRO',600,549,499,419);
