@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{page_title}}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/434b6475b4.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+
+    <section>
+        <nav>
+            <div class="navbar">
+                <div class="menu-bar">
+                    <div class="logo">
+                        <a href="/" class="link">BookQuest</a>
+                    </div>
+                    <div class="menu-links">
+                        <ul>
+                            <li><a href="/" class="link">Home</a></li>
+                            <li><a href="/search" class="link">Search Book</a></li>
+                            {% if user.is_authenticated %}
+                            <li class="profile-menu link" style="cursor: pointer;">
+                                Welcome {{user.first_name}}
+                                <ul class="profile">
+                                    <li><a href="/accounts/profile" class="link">Profile</a></li>
+                                    <li><a href="/reserved-list" class="link">My Bookings</a></li>
+                                    <li><a href="/favourites" class="link">My Bookshelf</a></li>
+                                    <li><a href="/accounts/logout" class="link"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li><a href="/accounts/login" class="link">Login</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="search-bar">
+                    <form action="/search" method="post">
+                        {% csrf_token %}
+                        <div class="navbar-form">
+                            <select name="searchby">
+                                <option selected>All</option>
+                                <option value="title">Title</option>
+                                <option value="author">Author</option>
+                                <option value="publication">Publication</option>
+                                <option value="subject">Subject</option>
+                                <option value="chapter">Chapter</option>
+                                <option value="sub-topic">Sub-Topic</option>
+                            </select>
+                            <input type="text" name="search" placeholder="Search book you wish to read">
+                            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <style>
+        .message{
+            /* margin: 0px 5px; */
+            width: 100%;
+            position: relative;
+            top: 0;
+            background:none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .message-info{
+            width: 95%;
+            border-radius: 5px;
+            border: 1px solid rgb(0, 179, 0);
+            background-color: rgba(176, 255, 176, 0.726);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .message-info p:nth-child(2):hover{
+            cursor: pointer;
+        }
+
+    </style>
+
+    {% for message in messages %}
+    <div class="message" id="message">
+        <div class="message-info {{message.tags}}">
+            <p id="message-text">{{message}}</p>
+            <p id="message-text" onclick='document.getElementById("message").style.display = "none"'><i class="fa-solid fa-xmark"></i></p>
+        </div>
+    </div>
+    {% endfor %}

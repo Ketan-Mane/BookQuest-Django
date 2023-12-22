@@ -1,0 +1,37 @@
+{% include "admin-header.html" with page_title="Department - "|add:department.name %}
+
+    <style>
+        @media screen and (min-width:620px) {
+            .container .box {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+    </style>
+
+    <section>
+        <div class="container">
+            <div class="box">
+                <h1 style="font-weight: 100;">Update Department</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-field">
+                        <label for="author">Name</label>
+                        <input type="hidden" name="id" value="{{department.id}}">
+                        <input type="text" name="name" value="{{department.name}}">
+                    </div>
+
+                    <div class="form-group">
+                        <button class="action-button blue" style="padding: 5px 15px;" type="submit">Update</button>
+                    </form>
+                    <form action="remove" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{department.id}}">
+                        <button class="action-button red" style="padding: 5px 15px;" type="submit">Delete</button>
+                    </form>
+                    </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

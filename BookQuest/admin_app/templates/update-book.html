@@ -1,0 +1,52 @@
+{% include "admin-header.html" with page_title=book_form.title.value|add:" | BookQuest" %}
+
+    <style>
+        @media screen and (min-width:620px) {
+            .container {
+                align-items: start;
+            }
+
+            .container .box {
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+        }
+    </style>
+
+    <section>
+        <div class="container">
+            <div class="box">
+                <h1 style="font-weight: 100;">Update Book</h1>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% for field in book_form %}
+                        <div class="form-field">
+                            {{field.label}}
+                            {{field}}
+                            <div class="error">
+                                {{field.errors.0}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                    <div class="form-group">
+                        <button class="action-button blue" style="padding: 5px 30px;" type="submit">Update</button>
+                </form>
+                
+                        <form action="remove" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{book_form.id.value}}">
+                            <button class="action-button red" style="padding: 5px 30px;">Delete</button>
+                        </form>
+                    </div>
+            </div>
+            <div class="box" style="flex-direction: column;">
+                <a class="action-button blue link" href="chapter">View Chapters</a>
+            </div>
+
+        </div>
+    </section>
+</body>
+</html>

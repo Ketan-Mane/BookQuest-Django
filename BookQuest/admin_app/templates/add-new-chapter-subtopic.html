@@ -1,0 +1,37 @@
+{% include "admin-header.html" with page_title="Chapters | BookQuest" %}
+
+    <style>
+        @media screen and (min-width:620px) {
+            .container .box {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+    </style>
+
+    <section>
+        <div class="container">
+            <div class="box">
+                <h1 style="font-weight: 100;">New Sub-Topic</h1>
+                <form action="" method="post">
+
+                    {% csrf_token %}
+                    {% for field in subtopic_form %}
+                    <div class="form-field" style="width:230px">
+                        {{field.label}}
+                        {{field}}
+                        <div class="error">
+                            <p>{{field.errors.0}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="form-group">
+                        <button class="action-button blue" style="padding: 5px 30px;" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

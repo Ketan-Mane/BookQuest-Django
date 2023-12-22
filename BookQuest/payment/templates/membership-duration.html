@@ -1,0 +1,144 @@
+{% include "header.html" with page_title="Membership Duration" %}
+{% load mathfilters %}
+
+
+    <style>
+        .container {
+            flex-direction: column;
+        }
+
+        .container .box {
+            flex-wrap: wrap;
+            margin: 20px 0px;
+        }
+
+        h1 {
+            padding: 0px 30px;
+            font-size: 30px;
+        }
+
+        .card {
+            position: relative;
+            width: max-content;
+            height: 290px;
+            margin: 20px 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 0px 3px gray;
+            transition: 0.3s;
+        }
+        
+        .card:hover{
+            transform: scale(1.1);
+        }
+
+        .card div {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        p {
+            font-size: 14px;
+            margin: 3px 15px;
+        }
+
+        .action-button {
+            position: absolute;
+            bottom: 8px;
+            padding: 5px 22px;
+        }
+    </style>
+
+
+    <section>
+        <div class="container">
+            <h1>Member Ship Duration</h1>
+            <div class="box">
+
+                <div class="card">
+                    <div style="color: #fff;background-color: #202020;padding: 10px 0px;">
+                        1 Month
+                    </div>
+                    <div>
+                        <h1 style="margin-top: 80px;">&#8377;.{{membership.month_1}}/<span style="font-size: 15px;">month</span></h1>
+                        <form action="membership-duration" method="POST">
+                            {% csrf_token %}
+                            <div class="form-combo" style="justify-content: center;">
+                                <input type="hidden" name="duration" value="1">
+                                <input type="hidden" name="selected_plan" value="{{membership.membership_type}}">
+                                <input type="hidden" name="charge" value="{{membership.month_1}}">
+                                <button type="submit" class="action-button black">Select</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div style="color: #fff;background-color: #202020;padding: 10px 0px;">
+                        3 Month
+                    </div>
+                    <div>
+                        <p style="margin-top: 40px;"><strike>&#8377;{{membership.month_1}}.00</strike></p>
+                        <h1 >&#8377;.{{membership.month_3}}/<span style="font-size: 15px;">month</span></h1>
+                        <p>Total &#8377;{{ membership.month_3|mul:3 }}</p>
+                        <form action="membership-duration" method="POST">
+                            {% csrf_token %}
+                            <div class="form-combo" style="justify-content: center;">
+                                <input type="hidden" name="duration" value="3">
+                                <input type="hidden" name="selected_plan" value="{{membership.membership_type}}">
+                                <input type="hidden" name="charge" value="{{membership.month_3}}">
+                                <button type="submit" class="action-button black">Select</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div style="color: #fff;background-color: #202020;padding: 10px 0px;">
+                        6 Month
+                    </div>
+                    <div>
+                        <p style="margin-top: 40px;"><strike>&#8377;{{membership.month_1}}.00</strike></p>
+                        <h1>&#8377;.{{membership.month_6}}/<span style="font-size: 15px;">month</span></h1>
+                        <p>Total &#8377;{{ membership.month_6|mul:6 }}</p>
+                        <form action="membership-duration" method="POST">
+                            {% csrf_token %}
+                            <div class="form-combo" style="justify-content: center;">
+                                <input type="hidden" name="duration" value="6">
+                                <input type="hidden" name="selected_plan" value="{{membership.membership_type}}">
+                                <input type="hidden" name="charge" value="{{membership.month_6}}">
+                                <button type="submit" class="action-button black">Select</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="color: #fff;background-color: #202020;padding: 10px 0px;">
+                        Annual
+                    </div>
+                    <div>
+                        <p style="margin-top: 40px;"><strike>&#8377;{{membership.month_1}}.00</strike></p>
+                        <h1>&#8377;.{{membership.month_12}}/<span style="font-size: 15px;">month</span></h1>
+                        <p>Total &#8377;{{ membership.month_12|mul:12 }}</p>
+                        <form action="membership-duration" method="POST">
+                            {% csrf_token %}
+                            <div class="form-combo" style="justify-content: center;">
+                                <input type="hidden" name="duration" value="12">
+                                <input type="hidden" name="selected_plan" value="{{membership.membership_type}}">
+                                <input type="hidden" name="charge" value="{{membership.month_12}}">
+                                <button type="submit" class="action-button black">Select</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    
+            </div>
+
+        </div>
+    </section>
+</body>
+</html>

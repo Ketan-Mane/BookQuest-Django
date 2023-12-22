@@ -1,0 +1,111 @@
+{% include "header.html" with page_title=form.first_name.value|add:" "|add:form.last_name.value|add:" - Profile" %}
+
+    <style>
+        .container {
+            justify-content: space-around;
+        }
+
+        .container .box {
+            width: max-content;
+            align-items: start;
+            flex-direction: column;
+        }
+
+        .a .form-group {
+            width: 300px;
+        }
+
+        .a .form-group p {
+            margin: 5px 0px;
+        }
+
+        @media screen and (min-width:620px) {
+
+            .container {
+                align-items: start;
+            }
+
+        }
+    </style>
+
+    <section>
+        <div class="container">
+            <div class="box">
+                <h1>Account Details</h1>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="form-field">
+                            {{form.first_name.label}}
+                            {{form.first_name}}
+                            <div class="error">
+                                {{form.first_name.errors}}
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            {{form.last_name.label}}
+                            {{form.last_name}}
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        {{form.email.label}}
+                        {{form.email}}
+                    </div>
+
+                    <div class="form-field">
+                        {{form.phone.label}}
+                        {{form.phone}}
+                        <div class="error">
+                            {{form.phone.errors.0}}
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        {{form.username.label}}
+                        {{form.username}}
+                    </div>
+
+                    <button class="action-button blue" type="submit" style="width: 100px;">Save</button>
+                </form>
+
+            </div>
+
+            <div class="box a">
+                <h1>Membership details</h1>
+                {% if membership %}
+                    <div class="form-group">
+                        <p>Membership Type</p>
+                        <p>{{membership.membership_type.membership_type}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Membership Duration</p>
+                        <p>{{membership.membership_duration}} Months</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Membership Start</p>
+                        <p>{{membership.membership_start_date}}</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Valid up to</p>
+                        <p>{{membership.membership_end_date}}</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Status</p>
+                        <p>{{membership.membership_status}}</p>
+                    </div>
+                    <a href="/pay/select-membership" class="action-button blue link" style="width: 80px;">Upgrade</a>
+                    {% else %}
+                    <h3>Get Membersip to access more services</h3>
+                    <a href="/pay/select-membership" class="action-button blue link" style="width: 80px;">Purchase Membership</a>
+                {% endif %}
+                
+
+            </div>
+
+        </div>
+    </section>
+</body>
+</html>

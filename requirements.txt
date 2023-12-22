@@ -1,0 +1,9 @@
+click==8.1.7
+colorama==0.4.6
+distlib==0.3.8
+filelock==3.13.1
+freeze-requirements==0.5.3
+platformdirs==4.1.0
+sh==2.0.6
+six==1.16.0
+virtualenv==20.25.0

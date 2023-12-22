@@ -1,0 +1,134 @@
+{% include "header.html" with page_title="Payment" %}
+
+    <style>
+        .container {
+            flex-direction: column;
+        }
+
+        .form-group {
+            padding: 8px 0px;
+        }
+
+        @media screen and (min-width:620px) {
+            .container .box {
+                width: max-content;
+                flex-direction: column;
+            }
+
+            .form-group {
+                padding: 10px 50px;
+            }
+        }
+    </style>
+
+    <section>
+        <div class="container">
+            <h1>Member Ship Details</h1>
+            <div class="box" style="margin: 10px 0px;">
+                <div class="form-group">
+                    <p>Member Ship Type</p>
+                    <p>{{membership_type}}</p>
+                </div>
+                <div class="form-group">
+                    <p>Member Ship Charges</p>
+                    <p><strong>&#8377;</strong> {{membership_charge}}/-</p>
+                </div>
+                <div class="form-group">
+                    <p>Member Ship Duration</p>
+                    <p>{{membership_duration}} months</p>
+                </div>
+                <div class="form-group">
+                    <p>Total Amount</p>
+                    <p><strong>&#8377;</strong> {{total_amount}}/-</p>
+                </div>
+            </div>
+            <div id="paypal-button-container"></div>
+        </div>
+
+        <form id="payment-form" action="payment-success" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="transaction_id" id="transaction_id">
+            <input type="hidden" name="status" id="status">
+            <input type="hidden" name="amount" id="amount">
+            <input type="hidden" name="membership_type" value="{{membership_type}}">
+            <input type="hidden" name="membership_charge" value="{{membership_charge}}">
+            <input type="hidden" name="membership_duration" value="{{membership_duration}}">
+            <input type="hidden" name="total_amount" value="{{total_amount}}">
+        </form>
+
+    </section>
+    
+    <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+
+    <script>
+        var amount = 1000
+        function initPayPalButton() {
+
+            paypal.Buttons({
+
+                style: {
+
+                    shape: 'rect',
+
+                    color: 'gold',
+
+                    layout: 'vertical',
+
+                    label: 'paypal',
+                },
+
+                createOrder: function (data, actions) {
+
+                    return actions.order.create({
+
+                        purchase_units: [{ "amount": { "currency_code": "USD", "value": amount } }]
+
+                    });
+
+                },
+
+                onApprove: function (data, actions) {
+
+                    return actions.order.capture().then(function (orderData) {
+
+                        // Full available details
+
+                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+                        // Show a success message within this page, e.g.
+
+                        const element = document.getElementById('paypal-button-container');
+
+                        element.innerHTML = '';
+
+                        element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+                        document.getElementById('transaction_id').value = orderData['id']
+                        document.getElementById('status').value = orderData['status']
+                        document.getElementById('amount').value = orderData['purchase_units'][0]['amount']['value']
+
+                        let form = document.getElementById('payment-form')
+                        form.submit()
+
+                        // Or go to another URL:  actions.redirect('thank_you.html');
+
+                    });
+
+                },
+
+                onError: function (err) {
+
+                    console.log(err);
+                }
+
+            }).render('#paypal-button-container');
+
+        }
+
+        initPayPalButton();
+
+    </script>
+</body>
+
+</html>

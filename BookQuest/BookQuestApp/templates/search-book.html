@@ -1,0 +1,61 @@
+{% include "header.html" with page_title="Books | BookQuest" %}
+
+    <style>
+        .container .box{
+            background-color: rgb(255, 255, 255);
+            flex-direction: column;
+        }
+
+    </style>
+
+    <section>
+            <div class="container">
+                <div class="box">
+
+                    {% for book in books %}
+                    <div class="book-card" onclick="window.location='/view-book/{{book.id}}'">
+                        <div class="book-image">
+                            <img src="{{book.image}}" alt="">
+                        </div>
+                        <div class="book-info">
+                            <div class="title">
+                                <h2>{{book.title}}</h2>
+                            </div>
+                            <div class="author">
+                                <p>by <span>{{book.author}}</span></p>
+                            </div>
+                            <div class="publication">
+                                <p>Publication : <span>{{book.publication}}</span></p>
+                            </div>
+                            <div class="available-status">
+                                {% if book.available_qty > 0 %}
+                                    <h4>Available <i class="fa-solid fa-circle"></i></h4>
+                                {% else %}
+                                    <h4>In Circulation <i class="fa-solid fa-circle"></i></h4>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+    </section>
+
+    <script>
+        let status = document.querySelectorAll('.available-status');
+        for(let i=0;i<status.length;i++)
+        {
+            s = status[i].innerText;
+            if(s=="Available")
+            {
+                status[i].style.color = "green"
+            }
+            else
+            {
+                status[i].style.color = "red"
+            }
+        }
+    </script>
+</body>
+</html>

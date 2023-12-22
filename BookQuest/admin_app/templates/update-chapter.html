@@ -1,0 +1,42 @@
+{% include "admin-header.html" with page_title="Chapter - "|add:chapter_form.name.value %}
+
+    <style>
+        @media screen and (min-width:620px) {
+            .container .box {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+    </style>
+
+    <section>
+        <div class="container">
+            <div class="box">
+                <h1 style="font-weight: 100;">Update Chapter</h1>
+                <form method="post">
+                    {% csrf_token %}
+                
+                    {% for field in chapter_form %}
+                    <div class="form-field">
+                        {{field.label}}
+                        {{field}}
+                        <div class="error">
+                            <p>{{field.errors.0}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+        
+                    <div class="form-group">
+                        <button class="action-button blue" style="padding: 5px 10px;" type="submit">Update</button>
+                    </form>
+                    <form action="delete" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{chapter_form.id.value}}">
+                        <button class="action-button red" style="padding: 5px 10px;" type="submit">Delete</button>
+                    </form>
+                    </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,120 @@
+{% include "header.html" with page_title="Reserved Books | BookQuest" %}
+
+
+    <style>
+        .container .box {
+            background-color: rgb(255, 255, 255);
+            flex-direction: column;
+        }
+
+        .action button {
+            cursor: pointer;
+            width: max-content;
+            border: none;
+            font-size: 20px;
+            color: red;
+            margin: 0px 10px;
+            background-color: transparent;
+        }
+
+        .type {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        @media screen and (min-width:620px) {
+
+            .title {
+                width: 70%;
+            }
+
+            .container .box .book-card .book-info {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        @media screen and (max-width:620px) {
+
+            .type {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .type p::before{
+                content: ": ";
+            }
+
+            .action button {
+                margin: 0;
+            }
+
+        }
+    </style>
+
+    <section>
+        <div class="container">
+            <div class="box">
+                <h2 style="width:100%">Reserved Books</h2>
+
+                {% for reserved in reserved_books %}
+                <div class="book-card" onclick="window.location='/view-book/{{reserved.book.id}}'">
+                    <div class="book-image">
+                        <img src="{{reserved.book.image}}" alt="">
+                    </div>
+                    <div class="book-info">
+                        <div class="title">
+                            <h2>{{reserved.book.title}}</h2>
+                            <p>{{reserved.book.author}}</p>
+                        </div>
+                        <div class="action">
+                            <p>{{reserved.status}}</p>
+                        </div>
+                        <div class="action">
+                            {% if reserved.status == "Not issued" %}
+                            <form action="/remove_reservedbook">
+                                <input type="hidden" name="reserved_id" value="{{reserved.id}}">
+                                <button type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section>
+        <div class="container">
+            <div class="box">
+                <h2 style="width:100%">Issued Books</h2>
+
+                {% for issue_book in issued_books %}
+                <div class="book-card" onclick="window.location='/view-book/{{issue_book.book.id}}'">
+                    <div class="book-image">
+                        <img src="{{issue_book.book.image}}" alt="">
+                    </div>
+                    <div class="book-info">
+                        <div class="title">
+                            <h2>{{issue_book.book.title}}</h2>
+                            <p>{{issue_book.book.author}}</p>
+                        </div>
+                        <div class="type">
+                            <h4>{{issue_book.return_status}}</h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>

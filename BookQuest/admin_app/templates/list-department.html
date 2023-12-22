@@ -1,0 +1,55 @@
+{% include "admin-header.html" with page_title="Departments | BookQuest" %}
+<meta name="viewport" content="width=1080px">
+    <style>
+        p {
+            padding-left: 10px;
+            font-size: 14px;
+        }
+    </style>
+
+    <section>
+        <div class="container">
+            <div class="box" style="flex-direction: column;">
+                <div class="admin-search-container">
+                    <div>
+                        <a href="add-department" class="action-button blue link">Add Department</a>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Department Id</th>
+                            <th>Department Name</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for department in departments %}
+                        <tr>
+                            <td>{{department.id}}</td>
+                            <td>
+                                <h4>{{department.name}}</h4>
+                                {% for subject in subjects %}
+                                <p>
+                                    {% if department == subject.department %}
+                                    {{subject.name}}
+                                    <a href="{{department.id}}/subject/{{subject.id}}">View</a>
+                                    {% endif %}
+                                </p>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <div class="box" style="justify-content: start;">
+                                    <a href="{{department.id}}" class="action-button blue link" style="margin: 0px 5px;">View Department</a>
+                                    <a href="{{department.id}}/subject/add-subject" class="action-button blue link" style="margin: 0px 5px;">Add Subject</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

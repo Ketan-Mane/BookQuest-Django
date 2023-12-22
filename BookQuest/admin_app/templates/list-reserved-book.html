@@ -1,0 +1,64 @@
+{% include "admin-header.html" with page_title="Reserved Books | BookQuest" %}
+<meta name="viewport" content="width=1080px">
+    <section>
+        <div class="container">
+            <div class="box" style="flex-direction: column;">
+                <div class="admin-search-container">
+                    <div class="form-field" style="width: 40%;">
+                        <input type="text" name="" id="book_transaction_src" onkeyup="searchTable(this.value)"
+                            placeholder="Enter Book Id to search">
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Book ID</th>
+                            <th>Student Id</th>
+                            <th>Reserved Date</th>
+                            <th>Status Date</th>
+                            <th>Action</th>
+                        </tr>
+
+                        {% for reserved_book in reserved_books %}
+                        <tr>
+                            <td>{{reserved_book.id}}</td>
+                            <td>{{reserved_book.book}}</td>
+                            <td>{{reserved_book.user.id}}</td>
+                            <td>{{reserved_book.reserved_date_time}}</td>
+                            <td>{{reserved_book.status}}</td>
+                            <td>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{reserved_book.id}}">
+                                    <button class="action-button blue" type="submit">Issue</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function searchTable(book_id) {
+            let a = document.querySelectorAll("tr")
+
+            for (let i = 1; i < a.length; i++) {
+
+                let td = a[i].getElementsByTagName("td")[0]
+                if (td.innerText.includes(book_id)) {
+                    a[i].style.display = "";
+                }
+                else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

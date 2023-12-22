@@ -1,0 +1,41 @@
+{% include "admin-header.html" with page_title="Sub-topic - "|add:subtopic_form.topic_name.value %}
+
+    <style>
+        @media screen and (min-width:620px) {
+            .container .box {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+    </style>
+
+    <section>
+        <div class="container">
+            <div class="box">
+                <h1 style="font-weight: 100;">New Sub-Topic</h1>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% for field in subtopic_form %}
+                    <div class="form-field" style="width:230px">
+                        {{field.label}}
+                        {{field}}
+                        <div class="error">
+                            <p>{{field.errors.0}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="form-group">
+                        <button class="action-button blue" style="padding: 5px 30px;">Update</button>
+                    </form>
+                    <form action="remove" method="post">
+                        {% csrf_token %}
+                        {{subtopic_form.id}}
+                        <button class="action-button red" style="padding: 5px 30px;" type="submit">Delete</button>
+                    </form>
+                    </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
